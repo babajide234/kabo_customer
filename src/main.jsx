@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
 import { UserProvider } from './context/Context';
 import Alert from './components/Alert';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import App from './App'
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css'
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();
 

@@ -1,12 +1,9 @@
-import React, { useState,useEffect} from 'react'
+import React, { useState} from 'react'
 import { motion } from 'framer-motion'
-import { ProductCard, ProductCards, RecommendProductCard, SearchProductCards } from '../components/Cards/Cards'
-import { Carousel } from '../components/Carousal/Carousal'
-import { SearchInput } from '../components/Inputs'
+import { ProductCard, RecommendProductCard, SearchProductCards } from '../components/Cards/Cards'
 import { Tab, TabPanel } from '../components/Tab/Tab'
 import useProductStore from '../store/productSlice'
 import useUserStore from '../store/userSlice'
-import useFetch from '../api/useFetch'
 import { Modal } from '../components/Modal/Modal'
 import searchStore from '../store/searchSlice'
 import { Link } from 'react-router-dom'
@@ -21,9 +18,6 @@ const Shop = () => {
 
     const [ location, setLocation] = useState('')
 
-    const token = useUserStore(state => state.token)
-    const getProducts = useProductStore(state => state.getProducts)
-    const getCat = useProductStore(state => state.getCat)
     // const products = useProductStore(state => state.products)
     const searchModal = searchStore(state => state.searchModal)
     const changeSearchModal = searchStore(state => state.changeSearchModal)

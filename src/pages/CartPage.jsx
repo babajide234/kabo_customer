@@ -1,6 +1,5 @@
 import React from 'react'
 import { CartCards } from '../components/Cards/Cards'
-import img from '../assets/food.svg';
 import Buttons from '../components/buttons/Buttons';
 import useCartStore from '../store/cartSlice';
 import EmptyPage from '../components/EmptyPage';
@@ -8,17 +7,7 @@ import Icon from '../assets/ector.svg'
 
 const CartPage = () => {
     const cart = useCartStore(state=> state.cart);
-    const remove = useCartStore(state=> state.remove);
-
-    const handleRemove = ()=>{
-
-    }
-    const handlefav = ()=>{
-
-    }
-    const updateQty = ()=>{
-
-    }
+  
   return (
     <div className=" min-h-full flex flex-col justify-between">
         <div className="">

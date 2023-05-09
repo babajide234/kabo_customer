@@ -1,7 +1,6 @@
 import { motion,AnimatePresence } from 'framer-motion';
 import React, { useState } from 'react'
 import logo from '../assets/logo.jpeg'
-import svg1 from '../assets/8.svg'
 import Buttons from '../components/buttons/Buttons';
 
 const Step = ({ currentStep, stepNumber, children }) => {

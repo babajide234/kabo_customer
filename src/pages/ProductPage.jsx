@@ -1,8 +1,5 @@
 import React, {useEffect} from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import food from '../assets/food.svg';
-import Buttons from '../components/buttons/Buttons';
-import { Spinner } from '../components/Spinner';
 import useCartStore from '../store/cartSlice';
 import useProductStore from '../store/productSlice';
 import useUserStore from '../store/userSlice'

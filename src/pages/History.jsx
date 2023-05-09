@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Icon from '../assets/ector.svg'
 
 import EmptyPage from '../components/EmptyPage'
