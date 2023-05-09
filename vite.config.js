@@ -27,7 +27,10 @@ export default defineConfig({
             sizes: '512x512',
             type: 'image/png'
           }
-        ]
+        ],
+        injectRegister: true,
+        registerType: 'auto-update',
+        revision: '1234567890' // add a revision number for your files
       }
     })
   ],
