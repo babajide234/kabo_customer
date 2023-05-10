@@ -29,68 +29,68 @@ const Shop = () => {
       timeout: 10000,
     });
 
-    const { data: storeNearMe , isLoading: storeIsloading } = useQuery(['location', geolocation], async () => {
-      const response = await instance.post('misc/choose-location',{
-          token: "",
-          // lat: geolocation.latitude,
-          // long: geolocation.longitude,
+  //   const { data: storeNearMe , isLoading: storeIsloading } = useQuery(['location', geolocation], async () => {
+  //     const response = await instance.post('misc/choose-location',{
+  //         token: "",
+  //         // lat: geolocation.latitude,
+  //         // long: geolocation.longitude,
 
-          lat: 6.595587,
-          long: 3.3451767,
-          address: ""
+  //         lat: 6.595587,
+  //         long: 3.3451767,
+  //         address: ""
 
         
-      });
+  //     });
   
-      return response.data;
-    },{
-      enabled: true,
-    });
+  //     return response.data;
+  //   },{
+  //     enabled: true,
+  //   });
   
-    const { data: categories , isLoading: categoryIsloading  } = useQuery(['category'], async () => {
-      const response = await instance.post('store/category',{
-          token: "",
-          category_id: ""
-      });
+  //   const { data: categories , isLoading: categoryIsloading  } = useQuery(['category'], async () => {
+  //     const response = await instance.post('store/category',{
+  //         token: "",
+  //         category_id: ""
+  //     });
   
-      return response.data;
-    },{
-      enabled: true,
-    });
+  //     return response.data;
+  //   },{
+  //     enabled: true,
+  //   });
 
-    const { data: products  , isLoading: productLoad } = useQuery(['product' , storeNearMe ], async () => {
-      const response = await instance.post('store/products',{
-      token: "",
-      id: "",
-      store_id: "",
-      category_id: "",
-      sub_category_id: "",
-      location: storeNearMe ? storeNearMe.data : "",
-      store: "",
-      orderBy: "",
-      active: "",
-      page: "",
-      limit: ""
-  });
+  //   const { data: products  , isLoading: productLoad } = useQuery(['product' , storeNearMe ], async () => {
+  //     const response = await instance.post('store/products',{
+  //     token: "",
+  //     id: "",
+  //     store_id: "",
+  //     category_id: "",
+  //     sub_category_id: "",
+  //     location: storeNearMe ? storeNearMe.data : "",
+  //     store: "",
+  //     orderBy: "",
+  //     active: "",
+  //     page: "",
+  //     limit: ""
+  // });
   
-      return response.data;
-    },{
-      enabled: true,
-    });
+  //     return response.data;
+  //   },{
+  //     enabled: true,
+  //   });
 
-    const { data: recomended  , isLoading: recomendedLoad } = useQuery(['recomended'], async () => {
-      const response = await instance.post('store/top-sales',{
-        token: "",
-        store_id: "",
-        category_id: "",
-        sub_category_id: "",
-        active: ""
-    });
+  //   const { data: recomended  , isLoading: recomendedLoad } = useQuery(['recomended'], async () => {
+  //     const response = await instance.post('store/top-sales',{
+  //       token: "",
+  //       store_id: "",
+  //       category_id: "",
+  //       sub_category_id: "",
+  //       active: ""
+  //   });
   
-      return response.data;
-    },{
-      enabled: true,
-    });
+  //     return response.data;
+  //   },{
+  //     enabled: true,
+  //   });
 
     // const { data: categories  , loading, error} = useFetch('store/category');
     
@@ -127,10 +127,10 @@ const Shop = () => {
           className="min:h-full w-full pb-32"
         >
               <div className=" flex justify-center px-5 mb-5">
-              {
+              {/* {
                 storeIsloading ? <Skeleton width={100} height={30}/> : 
                 storeNearMe ?  <div className=" flex items-center justify-between text-2xl capitalize"> <MdLocationPin/> - { storeNearMe.data } </div> : <button onClick={()=> setLocation(!location)} className=" text-xl font-bold flex items-center">Select store <span className=" ml-5 text-3xl"><MdKeyboardArrowDown/></span></button>
-              } 
+              }  */}
               </div>
               <div className=" px-5">
                 <h1 className=" text-xl leading-10 font-bold mb-5">What do you want to eat today?</h1>
@@ -145,8 +145,8 @@ const Shop = () => {
                   </div>
                 </div>
               </div>
-              <Tab>
-                    {
+              {/* <Tab> */}
+                    {/* {
                         categories ? (
                             categories.data.map((item, index) => (
                                 <TabPanel title={item.category_name} key={index}>
@@ -157,15 +157,15 @@ const Shop = () => {
                         ): (
                             <Skeleton/>
                         )
-                    }
-              </Tab>
+                    } */}
+              {/* </Tab> */}
               <div className="flex justify-between mt-10 px-5">
                 <h2 className=" text-base font-bold">Recomendation</h2>
                 <Link className=' text-primary text-sm font-semibold'>Show All</Link>
               </div>
               <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
                 <div className="flex">
-                  {
+                  {/* {
                     recomendedLoad ? (
                       <Skeleton/>
                     ) : (
@@ -173,7 +173,7 @@ const Shop = () => {
                         <RecommendProductCard key={index} id={item.id} src={item.main_photo} title={item.name} category={item.category_name} price={item.amount} />
                       ))
                     )
-                  }
+                  } */}
                   {/* <RecommendProductCard />
                   <RecommendProductCard /> */}
                 </div>
