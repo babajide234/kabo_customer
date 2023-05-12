@@ -25,7 +25,7 @@ export const ProductCard = ({src,title,price,id}) => {
   return (
     <Link 
       to={`/product/${id}`} 
-      className=" w-[156px] h-[202px] shadow-card p-3 bg-white flex flex-col ml-[34px] mt-5  rounded-lg  ">
+      className=" w-full h-[202px] shadow-card p-3 bg-white flex flex-col  rounded-lg  ">
         <div className={`overflow-hidden rounded-lg flex justify-center items-center`}>
           <img src={src} alt="" className=" w-full h-full" />
         </div>

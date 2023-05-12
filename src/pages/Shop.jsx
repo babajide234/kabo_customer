@@ -148,7 +148,12 @@ const Shop = () => {
         
         if (filtered.length > 0) {
           return filtered.map((product) => (
-            <ProductCard src={product.main_photo} title={product.name} price={`${product.amount} `} id={product.id} />
+            <ProductCard 
+              src={product.main_photo} 
+              title={product.name} 
+              price={`${product.amount} `} 
+              id={product.id} 
+            />
           ));
         } else {
           return (
@@ -216,7 +221,7 @@ const Shop = () => {
                 link="/" 
                 linkText="show all"
               />
-              <div className=" px-5 flex items-center justify-between">
+              <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
                 {
                     stores ? (
                       stores?.data.map((item, index)=>(
@@ -231,11 +236,28 @@ const Shop = () => {
                       <></>
                     )
                 }
-                {/* <StoreCard 
-                   id={'2'}
-                   title={'shoprite'}
-                   src={'https://kabo.designparklab.com.ng/files/logo.png'}
-                /> */}
+              </div>
+              <CommonHeader 
+                headerText="Products" 
+                link="/" 
+                linkText="show all"
+              />
+              <div className=" grid grid-cols-3 gap-5 px-5 w-full">
+                {
+                  products? (
+                    products.data.map((item, index) => (
+                      <ProductCard 
+                        key={index}
+                        src={item.main_photo} 
+                        title={item.name} 
+                        price={`${item.amount} `} 
+                        id={item.id} 
+                      />
+                    ))
+                  ): (
+                    <></>
+                  )
+                }
               </div>
               {/* <Tab>
                     {
