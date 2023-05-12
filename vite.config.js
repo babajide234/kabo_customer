@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({ 
       registerType: 'autoUpdate' ,
+      injectRegister: true,
       devOptions: {
         enabled: true
       },
@@ -28,9 +29,14 @@ export default defineConfig({
             type: 'image/png'
           }
         ],
-        injectRegister: true,
-        registerType: 'auto-update',
-        revision: '1234567890' // add a revision number for your files
+      },
+      workbox: {
+        globDirectory: 'dist',
+        globPatterns: ['**/*'],
+        swDest: 'dist/sw.js',
+        additionalManifestEntries: [
+          { url: 'index.html', revision: null } // Precache index.html without revisioning
+        ]
       }
     })
   ],
