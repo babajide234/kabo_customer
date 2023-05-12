@@ -8,8 +8,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-bg': "linear-gradient(180.36deg, rgba(255, 71, 11, .1) 74.08%, #FF470B 100.09%),url('../src/assets/bg.png')",
-        'auth-bg': "url('../src/assets/bg.png')",
+
       },
       colors: {
         'default':'#F5F5F8',
