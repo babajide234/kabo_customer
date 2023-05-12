@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
 import { ProductCard, RecommendProductCard, SearchProductCards } from '../components/Cards/Cards'
 import { Tab, TabPanel } from '../components/Tab/Tab'
@@ -17,6 +17,10 @@ import { MdKeyboardArrowDown, MdLocationPin } from 'react-icons/md'
 const Shop = () => {
 
     const [ location, setLocation] = useState('')
+    const [ storeNearMe, setStoreNearMe] = useState(null)
+    const [ categories, setCategories] = useState(null)
+    const [ products, setProducts] = useState(null)
+    const [ recomended, setRecomended] = useState(null)
 
     // const products = useProductStore(state => state.products)
     const searchModal = searchStore(state => state.searchModal)
@@ -29,72 +33,91 @@ const Shop = () => {
       timeout: 10000,
     });
 
-  //   const { data: storeNearMe , isLoading: storeIsloading } = useQuery(['location', geolocation], async () => {
-  //     const response = await instance.post('misc/choose-location',{
-  //         token: "",
-  //         // lat: geolocation.latitude,
-  //         // long: geolocation.longitude,
+    useEffect(() => {
+      updateLocation()
+    }, [])
 
-  //         lat: 6.595587,
-  //         long: 3.3451767,
-  //         address: ""
+    useEffect(() => {
+      getProducts()
+      getCategory()
+      getRecommended()
+    }, [storeNearMe])
 
-        
-  //     });
-  
-  //     return response.data;
-  //   },{
-  //     enabled: true,
-  //   });
-  
-  //   const { data: categories , isLoading: categoryIsloading  } = useQuery(['category'], async () => {
-  //     const response = await instance.post('store/category',{
-  //         token: "",
-  //         category_id: ""
-  //     });
-  
-  //     return response.data;
-  //   },{
-  //     enabled: true,
-  //   });
+    const updateLocation = async () => {
+      try {
+          const response =  instance.post('misc/choose-location', {
+              token: "",
+              lat: 6.595587,
+              long: 3.3451767,
+              address: ""
+          });
+          response.then(res => {
+                console.log(res.data)
+                setStoreNearMe(res.data)
+          })
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
-  //   const { data: products  , isLoading: productLoad } = useQuery(['product' , storeNearMe ], async () => {
-  //     const response = await instance.post('store/products',{
-  //     token: "",
-  //     id: "",
-  //     store_id: "",
-  //     category_id: "",
-  //     sub_category_id: "",
-  //     location: storeNearMe ? storeNearMe.data : "",
-  //     store: "",
-  //     orderBy: "",
-  //     active: "",
-  //     page: "",
-  //     limit: ""
-  // });
-  
-  //     return response.data;
-  //   },{
-  //     enabled: true,
-  //   });
+    const getCategory = async () => {
+      try {
+          const response = await instance.post('store/category',{
+              token: "",
+              category_id: ""
+          });
 
-  //   const { data: recomended  , isLoading: recomendedLoad } = useQuery(['recomended'], async () => {
-  //     const response = await instance.post('store/top-sales',{
-  //       token: "",
-  //       store_id: "",
-  //       category_id: "",
-  //       sub_category_id: "",
-  //       active: ""
-  //   });
-  
-  //     return response.data;
-  //   },{
-  //     enabled: true,
-  //   });
+          console.log('category',response);
+          setCategories(response.data)
 
-    // const { data: categories  , loading, error} = useFetch('store/category');
-    
-    
+          // response.then(res => {
+          // })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  
+    const getProducts = async () => {
+      try {
+        const response = await instance.post('store/products', {
+            token: "",
+            id: "",
+            store_id: "",
+            category_id: "",
+            sub_category_id: "",
+            location: storeNearMe ? storeNearMe.data : "",
+            store: "",
+            orderBy: "",
+            active: "",
+            page: "",
+            limit: ""
+        });
+
+          console.log('category',response);
+          setProducts(response.data);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    const getRecommended = async () => {
+      try {
+          const response = await instance.post('store/top-sales',{
+            token: "",
+            store_id: "",
+            category_id: "",
+            sub_category_id: "",
+            active: ""
+          });
+
+          console.log('recommend',response);
+          setRecomended(response.data);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
     const filterProductsByCategory = (categoryName) => {
         if (!products?.data) {
@@ -127,13 +150,12 @@ const Shop = () => {
           className="min:h-full w-full pb-32"
         >
               <div className=" flex justify-center px-5 mb-5">
-              {/* {
-                storeIsloading ? <Skeleton width={100} height={30}/> : 
-                storeNearMe ?  <div className=" flex items-center justify-between text-2xl capitalize"> <MdLocationPin/> - { storeNearMe.data } </div> : <button onClick={()=> setLocation(!location)} className=" text-xl font-bold flex items-center">Select store <span className=" ml-5 text-3xl"><MdKeyboardArrowDown/></span></button>
-              }  */}
+              {
+                storeNearMe ?  <div className=" flex items-center justify-between text-2xl capitalize font-bold"> <MdLocationPin className=' text-primary mr-3'/>{ storeNearMe.data } </div> : <Skeleton width={100} height={30}/>
+              } 
               </div>
               <div className=" px-5">
-                <h1 className=" text-xl leading-10 font-bold mb-5">What do you want to eat today?</h1>
+                {/* <h1 className=" text-xl leading-10 font-bold mb-5">What do you want to eat today?</h1> */}
               </div>
               <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide">
                 <div className="flex">
@@ -145,8 +167,8 @@ const Shop = () => {
                   </div>
                 </div>
               </div>
-              {/* <Tab> */}
-                    {/* {
+              <Tab>
+                    {
                         categories ? (
                             categories.data.map((item, index) => (
                                 <TabPanel title={item.category_name} key={index}>
@@ -155,29 +177,59 @@ const Shop = () => {
                             ))
                           
                         ): (
-                            <Skeleton/>
+                          <div className=' flex flex-col w-full px-5'>
+                            
+                            <div className=" w-full mb-5">
+                              <Skeleton height={40}/>
+                            </div>
+                            <div className="w-full flex">
+                              <div className=" mr-5">
+                                <Skeleton height={160} width={120}/>
+                              </div>
+                              <div className=" mr-5">
+                                <Skeleton height={160} width={120}/>
+                              </div>
+                              <div className=" mr-5">
+                                <Skeleton height={160} width={120}/>
+                              </div>
+                            </div>
+                          </div>
                         )
-                    } */}
-              {/* </Tab> */}
-              <div className="flex justify-between mt-10 px-5">
-                <h2 className=" text-base font-bold">Recomendation</h2>
-                <Link className=' text-primary text-sm font-semibold'>Show All</Link>
-              </div>
-              <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
-                <div className="flex">
-                  {/* {
-                    recomendedLoad ? (
-                      <Skeleton/>
+                    }
+              </Tab>
+                  {
+                    recomended ? (
+                      <div className=' flex flex-col w-full px-5'>
+                          <div className=" w-full mb-5">
+                            <Skeleton height={40}/>
+                          </div>
+                          <div className="w-full flex">
+                            <div className=" mr-5">
+                              <Skeleton height={100} width={160}/>
+                            </div>
+                            <div className=" mr-5">
+                              <Skeleton height={100} width={160}/>
+                            </div>
+                          </div>
+                      </div>
                     ) : (
-                      recomended.data.map((item, index) => (
-                        <RecommendProductCard key={index} id={item.id} src={item.main_photo} title={item.name} category={item.category_name} price={item.amount} />
-                      ))
+                      <>
+                        <div className="flex justify-between mt-10 px-5">
+                          <h2 className=" text-base font-bold">Recomendation</h2>
+                          <Link className=' text-primary text-sm font-semibold'>Show All</Link>
+                        </div>
+                        <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
+                          <div className="flex">
+                              {
+                                recomended?.data.map((item, index) => (
+                                  <RecommendProductCard key={index} id={item.id} src={item.main_photo} title={item.name} category={item.category_name} price={item.amount} />
+                                ))
+                              }
+                          </div>
+                        </div>
+                      </>
                     )
-                  } */}
-                  {/* <RecommendProductCard />
-                  <RecommendProductCard /> */}
-                </div>
-              </div>
+                  }
         </motion.div>
 
         <Modal title="Search Result" open={searchModal} close={handleModalClose}>

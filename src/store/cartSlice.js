@@ -96,6 +96,8 @@ const useCartStore = create(
                 console.log(res);
                 if( res.data.status == 'success'){
                     set(state => ({ ...state, checkout: res.data.reference_code }))
+                    set(state => ({ ...state, cart: null }))
+                    set(state => ({ ...state, shiping_details: false }))
                 }
             })
             .catch((err) => {
@@ -146,6 +148,22 @@ const useCartStore = create(
                 }
                 set(state => ({ ...state, loading: false }))
             })
+        },
+        payment:()=>{
+            useLoaderStore.setState({ isLoading: true });
+
+            postrequest('order/pay', data).then( res => {
+                console.log(res);
+                if( res.data.status == 'success'){
+                    
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            .finally(() => {
+                useLoaderStore.setState({ isLoading: false });
+            });
         },
         refetchCart:()=>{
             get().getCart({ token: useUserStore.getState().token })

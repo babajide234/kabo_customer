@@ -6,6 +6,7 @@ import { CardContent } from '../components/Cards/Cards';
 import Alert from '../components/Alert';
 import Buttons from '../components/buttons/Buttons';
 import AnimatedCheck from '../components/AnimationCheck';
+import { useNavigate } from 'react-router-dom';
 
 const Paymentpage = () => {
   const token = useUserStore((state) => state.token)
@@ -13,22 +14,25 @@ const Paymentpage = () => {
   const cart = useCartStore((state) => state.cart)
   const order = useCartStore((state) => state.order)
   const checkout = useCartStore((state) => state.checkout)
+  const payment = useCartStore((state) => state.payment)
 
   const { open , setOpen } = useState(true);
   const [alert, setAlert] = useState(false)
 
   const { paymentType , setPaymentType } = useState(true);
 
+  const navigate = useNavigate();
+
   const config = {
     public_key: 'FLWPUBK_TEST-e6a2fdc7c99903def336ab7d047ad6f7-X',
     tx_ref: checkout,
-    amount: cart.amount.total,
+    amount: cart?.amount.total,
     currency: 'NGN',
     payment_options: 'card,mobilemoney,ussd',
     customer: {
-      email: details.email,
-      phone_number:details.phone,
-      name: details.othernames+" "+details.lastname,
+      email: details?.email,
+      phone_number:details?.phone,
+      name: details?.othernames+" "+details?.lastname,
     },
     customizations: {
       title: 'Payment',
@@ -46,8 +50,13 @@ const Paymentpage = () => {
     order(data);
   }
 
-  const handlePay = ()=>{
-
+  const handlePay = (ref)=>{
+    const data = {
+      token,
+      reference_code: "",
+      channel: "" //enum - wallet or leave blank to use other method from flutterwave
+    }
+    payment(data);
   }
 
   useEffect(() => {
@@ -56,16 +65,22 @@ const Paymentpage = () => {
       handleFlutterPayment({
         callback: (response) => {
           console.log(response);
-          handleCheckout()
+          handlePay(response.data.flw_ref)
           setAlert(!alert);
-          closePaymentModal() 
         },
         onClose: () => {
-          handleCheckout()
+
         },
       });
     }
   }, [checkout])
+
+  // useEffect(() => {
+  //   // if cart not set redirect too checkout
+  //   if(cart == null){
+  //     navigate('/shop')
+  //   }
+  // }, [cart])
 
   const closeAlert = ()=>{
     setAlert(!alert)
@@ -77,7 +92,7 @@ const Paymentpage = () => {
         <CardContent title={'Shiping Adress'}>
           <div className=" flex flex-col ">
             <h2 className=" font-bold text-xl">Home</h2>
-            <p className="  font-medium text-lg text-gray-500 mt-3">{details.address}</p>
+            <p className="  font-medium text-lg text-gray-500 mt-3">{details?.address}</p>
           </div>
         </CardContent>
 
