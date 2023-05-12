@@ -5,7 +5,6 @@ import {
   FaTrash,
   FaRegHeart
 } from 'react-icons/fa';
-import Skeleton from '@yisheng90/react-loading';
 import useCartStore from '../../store/cartSlice';
 import useUserStore from '../../store/userSlice';
 import { useMutation } from 'react-query';
@@ -42,7 +41,7 @@ export const RecommendProductCard = ({src,title,category,price,id}) => {
       to={`/product/${id}`} 
       className=" w-[239px] h-[90px] shadow-card p-3 bg-white flex justify-between mr-5 rounded-lg  ">
         <div className={`  w-[64px] h-[64px] mr-4 bg-slate-200 overflow-hidden rounded-lg flex justify-center items-center`}>
-          { src ?  <img src={src} alt="" className=" w-full h-full" /> : <Skeleton height={64}  width={64}/> }
+          { src ?  <img src={src} alt="" className=" w-full h-full" /> : <div className=" w-full h-[64px] bg-slate-200 rounded-lg mr-4"/>}
         </div>
         <div className="flex flex-col justify-center">
           <h2 className=" text-sm font-bold capitalize text-ellipsis">{ title }</h2>

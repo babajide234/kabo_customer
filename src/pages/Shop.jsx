@@ -1,14 +1,14 @@
 import React, { useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { ProductCard, RecommendProductCard, SearchProductCards } from '../components/Cards/Cards'
 import { Tab, TabPanel } from '../components/Tab/Tab'
 import { Modal } from '../components/Modal/Modal'
-import searchStore from '../store/searchSlice'
-import { Link } from 'react-router-dom'
 import Banner1 from '../assets/Card.png'
 import useGeolocation from 'react-hook-geolocation'
+import searchStore from '../store/searchSlice'
 import { instance } from '../api/requests'
-import Skeleton from '@yisheng90/react-loading';
+// import Skeleton from '@yisheng90/react-loading';
 import {  MdLocationPin } from 'react-icons/md'
 
 const Shop = () => {
@@ -148,11 +148,11 @@ const Shop = () => {
         >
               <div className=" flex justify-center px-5 mb-5">
               {
-                storeNearMe ?  <div className=" flex items-center justify-between text-2xl capitalize font-bold"> <MdLocationPin className=' text-primary mr-3'/>{ storeNearMe.data } </div> : <Skeleton width={100} height={30}/>
+                storeNearMe ?  <div className=" flex items-center justify-between text-2xl capitalize font-bold"> <MdLocationPin className=' text-primary mr-3'/>{ storeNearMe.data } </div> : <div className=" w-[100px] h-[40px] bg-slate-200 rounded-lg mr-4"></div>
               } 
               </div>
               <div className=" px-5">
-                {/* <h1 className=" text-xl leading-10 font-bold mb-5">What do you want to eat today?</h1> */}
+                <h1 className=" text-xl leading-10 font-bold mb-5">What do you want to buy today?</h1>
               </div>
               <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide">
                 <div className="flex">
@@ -177,39 +177,39 @@ const Shop = () => {
                           <div className=' flex flex-col w-full px-5'>
                             
                             <div className=" w-full mb-5">
-                              <Skeleton height={40}/>
+                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
                             </div>
                             <div className="w-full flex">
-                              <div className=" mr-5">
-                                <Skeleton height={160} width={120}/>
+                              <div className=" w-32 mr-5">
+                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
                               </div>
-                              <div className=" mr-5">
-                                <Skeleton height={160} width={120}/>
+                              <div className=" w-32 mr-5">
+                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
                               </div>
-                              <div className=" mr-5">
-                                <Skeleton height={160} width={120}/>
+                              <div className=" w-32 mr-5">
+                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
                               </div>
                             </div>
                           </div>
                         )
                     }
               </Tab>
-                  {
-                    recomended ? (
+              {
+                !recomended ? (
                       <div className=' flex flex-col w-full px-5'>
                           <div className=" w-full mb-5">
-                            <Skeleton height={40}/>
+                            <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
                           </div>
                           <div className="w-full flex">
-                            <div className=" mr-5">
-                              <Skeleton height={100} width={160}/>
+                            <div className="w-32 mr-5">
+                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
                             </div>
-                            <div className=" mr-5">
-                              <Skeleton height={100} width={160}/>
+                            <div className=" w-32 mr-5">
+                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
                             </div>
                           </div>
                       </div>
-                    ) : (
+                ) : (
                       <>
                         <div className="flex justify-between mt-10 px-5">
                           <h2 className=" text-base font-bold">Recomendation</h2>
@@ -218,15 +218,22 @@ const Shop = () => {
                         <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
                           <div className="flex">
                               {
-                                recomended?.data.map((item, index) => (
-                                  <RecommendProductCard key={index} id={item.id} src={item.main_photo} title={item.name} category={item.category_name} price={item.amount} />
+                                recomended.data.map((item, index) => (
+                                  <RecommendProductCard 
+                                    key={index} 
+                                    id={item.id} 
+                                    src={item.main_photo} 
+                                    title={item.name} 
+                                    category={item.category_name} 
+                                    price={item.amount} 
+                                  />
                                 ))
                               }
                           </div>
                         </div>
                       </>
-                    )
-                  }
+                )
+              }
         </motion.div>
 
         <Modal title="Search Result" open={searchModal} close={handleModalClose}>

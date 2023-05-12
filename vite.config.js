@@ -4,11 +4,11 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  mode: 'development',
-  build: {
-    chunkSizeWarningLimit: 1000,
-    maxSize: 5 * 1024 * 1024, 
-  },
+  // mode: 'development',
+  // build: {
+  //   chunkSizeWarningLimit: 1000,
+  //   maxSize: 5 * 1024 * 1024, 
+  // },
   plugins: [
     react(),
     VitePWA({ 
