@@ -2,17 +2,14 @@ import React, { useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
 import { ProductCard, RecommendProductCard, SearchProductCards } from '../components/Cards/Cards'
 import { Tab, TabPanel } from '../components/Tab/Tab'
-import useProductStore from '../store/productSlice'
-import useUserStore from '../store/userSlice'
 import { Modal } from '../components/Modal/Modal'
 import searchStore from '../store/searchSlice'
 import { Link } from 'react-router-dom'
 import Banner1 from '../assets/Card.png'
 import useGeolocation from 'react-hook-geolocation'
 import { instance } from '../api/requests'
-import { useQuery } from 'react-query'
 import Skeleton from '@yisheng90/react-loading';
-import { MdKeyboardArrowDown, MdLocationPin } from 'react-icons/md'
+import {  MdLocationPin } from 'react-icons/md'
 
 const Shop = () => {
 
