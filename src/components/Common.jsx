@@ -1,0 +1,12 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+export const CommonHeader = ({ headerText, link, linkText}) => {
+  return (
+    <div className=" px-5 flex items-center justify-between my-3">
+        <h1 className=" text-lg leading-10 font-bold">{headerText}</h1>
+        <Link to={link} className=' font-bold capitalize text-primary'>{linkText}</Link>
+    </div>
+  )
+}
+

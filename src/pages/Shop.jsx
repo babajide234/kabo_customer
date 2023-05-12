@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ProductCard, RecommendProductCard, SearchProductCards } from '../components/Cards/Cards'
+import { CategoryCard, ProductCard, RecommendProductCard, SearchProductCards, StoreCard } from '../components/Cards/Cards'
 import { Tab, TabPanel } from '../components/Tab/Tab'
 import { Modal } from '../components/Modal/Modal'
 import Banner1 from '../assets/Card.png'
@@ -10,6 +10,7 @@ import searchStore from '../store/searchSlice'
 import { instance } from '../api/requests'
 // import Skeleton from '@yisheng90/react-loading';
 import {  MdLocationPin } from 'react-icons/md'
+import { CommonHeader } from '../components/Common'
 
 const Shop = () => {
 
@@ -18,6 +19,7 @@ const Shop = () => {
     const [ categories, setCategories] = useState(null)
     const [ products, setProducts] = useState(null)
     const [ recomended, setRecomended] = useState(null)
+    const [ stores, setStores] = useState(null)
 
     // const products = useProductStore(state => state.products)
     const searchModal = searchStore(state => state.searchModal)
@@ -38,6 +40,7 @@ const Shop = () => {
       getProducts()
       getCategory()
       getRecommended()
+      getStore()
     }, [storeNearMe])
 
     const updateLocation = async () => {
@@ -116,6 +119,25 @@ const Shop = () => {
       }
     }
 
+    const getStore = async () => {
+      try {
+          const response = await instance.post('store/list',{
+            token: "",
+            store_id: "",
+            location: "",
+            store: "",
+            page: "",
+            limit: ""
+        });
+
+          console.log('stores',response);
+          setStores(response.data);
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
     const filterProductsByCategory = (categoryName) => {
         if (!products?.data) {
           return <div>Loading...</div>;
@@ -147,13 +169,16 @@ const Shop = () => {
           className="min:h-full w-full pb-32"
         >
               <div className=" flex justify-center px-5 mb-5">
-              {
-                storeNearMe ?  <div className=" flex items-center justify-between text-2xl capitalize font-bold"> <MdLocationPin className=' text-primary mr-3'/>{ storeNearMe.data } </div> : <div className=" w-[100px] h-[40px] bg-slate-200 rounded-lg mr-4"></div>
-              } 
+                  {
+                    storeNearMe ?  <div className=" flex items-center justify-between text-2xl capitalize font-bold"> <MdLocationPin className=' text-primary mr-3'/>{ storeNearMe.data } </div> : <div className=" w-[100px] h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"></div>
+                  } 
               </div>
-              <div className=" px-5">
-                <h1 className=" text-xl leading-10 font-bold mb-5">What do you want to buy today?</h1>
-              </div>
+              <CommonHeader 
+                headerText="What do you want to buy today?" 
+                link="/" 
+                linkText="view"
+              />
+
               <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide">
                 <div className="flex">
                   <div className=" w-[280px] h-[120px] bg-slate-200 rounded-lg mr-4">
@@ -164,7 +189,55 @@ const Shop = () => {
                   </div>
                 </div>
               </div>
-              <Tab>
+              <CommonHeader 
+                headerText="Categories" 
+                link="/" 
+                linkText="show all"
+              />
+
+              <div className=" px-5 grid grid-cols-3 gap-5">
+                {
+                  categories ? (
+                    categories.data.map((item, index) => (
+                      <CategoryCard
+                        key={index}
+                        id={item.category_id}
+                        title={item.category_name}
+                        src={item.img}
+                      />
+                    ))
+                  ): (
+                    <></>
+                  )
+                }
+              </div>
+              <CommonHeader 
+                headerText="Popular Stores" 
+                link="/" 
+                linkText="show all"
+              />
+              <div className=" px-5 flex items-center justify-between">
+                {
+                    stores ? (
+                      stores?.data.map((item, index)=>(
+                        <StoreCard
+                          key={index}
+                          id={item.store_id}
+                          title={item.name}
+                          src={item.photo}
+                        />
+                    ))
+                    ):(
+                      <></>
+                    )
+                }
+                {/* <StoreCard 
+                   id={'2'}
+                   title={'shoprite'}
+                   src={'https://kabo.designparklab.com.ng/files/logo.png'}
+                /> */}
+              </div>
+              {/* <Tab>
                     {
                         categories ? (
                             categories.data.map((item, index) => (
@@ -177,61 +250,61 @@ const Shop = () => {
                           <div className=' flex flex-col w-full px-5'>
                             
                             <div className=" w-full mb-5">
-                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
+                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
                             </div>
                             <div className="w-full flex">
                               <div className=" w-32 mr-5">
-                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
+                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
                               </div>
                               <div className=" w-32 mr-5">
-                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
+                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
                               </div>
                               <div className=" w-32 mr-5">
-                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
+                                <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
                               </div>
                             </div>
                           </div>
                         )
                     }
-              </Tab>
+              </Tab> */}
               {
                 !recomended ? (
                       <div className=' flex flex-col w-full px-5'>
                           <div className=" w-full mb-5">
-                            <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
+                            <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
                           </div>
                           <div className="w-full flex">
                             <div className="w-32 mr-5">
-                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
+                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
                             </div>
                             <div className=" w-32 mr-5">
-                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4"/>
+                              <div className=" w-full h-[40px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
                             </div>
                           </div>
                       </div>
                 ) : (
-                      <>
-                        <div className="flex justify-between mt-10 px-5">
-                          <h2 className=" text-base font-bold">Recomendation</h2>
-                          <Link className=' text-primary text-sm font-semibold'>Show All</Link>
-                        </div>
-                        <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
-                          <div className="flex">
-                              {
-                                recomended.data.map((item, index) => (
-                                  <RecommendProductCard 
-                                    key={index} 
-                                    id={item.id} 
-                                    src={item.main_photo} 
-                                    title={item.name} 
-                                    category={item.category_name} 
-                                    price={item.amount} 
-                                  />
-                                ))
-                              }
-                          </div>
-                        </div>
-                      </>
+                <>
+                  <div className="flex justify-between mt-10 px-5">
+                    <h2 className=" text-base font-bold">Recomendation</h2>
+                    <Link className=' text-primary text-sm font-semibold'>Show All</Link>
+                  </div>
+                  <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
+                    <div className="flex">
+                        {
+                          recomended.data.map((item, index) => (
+                            <RecommendProductCard 
+                              key={index} 
+                              id={item.id} 
+                              src={item.main_photo} 
+                              title={item.name} 
+                              category={item.category_name} 
+                              price={item.amount} 
+                            />
+                          ))
+                        }
+                    </div>
+                  </div>
+                </>
                 )
               }
         </motion.div>

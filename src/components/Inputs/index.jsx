@@ -58,7 +58,7 @@ export const SearchInput =({...rest})=>{
                 
                 <input 
                     type="text"
-                    placeholder="Search your food"
+                    placeholder="Search Kabo"
                     value={searchTerm}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
