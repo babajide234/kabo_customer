@@ -20,9 +20,16 @@ export const scaleDown ={
         y:0
     },
     show: {
-        scale: .6,
-        x: 150,
-        y: -100
+        x:280
+    },
+}
+export const leftToRight ={
+    hidden: {
+        x:'-100%',
+        y:0
+    },
+    show: {
+        x:0
     },
 }
 
@@ -30,9 +37,9 @@ export const headerVariants = {
   fixed: {
     position: 'fixed',
     top: 0,
-    backgroundColor: '#fff',
+    left: 0,
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-    padding: '10px 0',
+    paddingBlock: '10px',
     transition: { duration: 0.3 },
   },
   unfixed: {

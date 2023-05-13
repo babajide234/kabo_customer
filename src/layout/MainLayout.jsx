@@ -14,14 +14,16 @@ const MainLayout = () => {
   return (
       <AnimatePresence>
         <Sidebar/>
-        
+        <div className=" w-full h-screen overflow-y-scroll overflow-x-hidden">
+
         <motion.div 
-            initial="hidden"
             key={'mainLayout'}
+            initial="hidden"
             animate={sidebar ? 'show' : 'hidden'}
             transition={{ duration: 0.3 }}
             variants={scaleDown}
-            className={`min-h-screen w-full bg-default pb-10 z-[150] ${ sidebar ? 'rounded-[50px] overflow-hidden' : ''} shadow-[-30px_40px_0px_0px_rgba(255,255,255,0.2)]`}
+            className={`min-h-screen w-full bg-default pb-10 z-[150] overflow-hidden shadow-[-30px_40px_0px_0px_rgba(255,255,255,0.2)]`}
+            // className={`min-h-screen w-full bg-default pb-10 z-[150] ${ sidebar ? 'rounded-[50px] overflow-hidden' : ''} shadow-[-30px_40px_0px_0px_rgba(255,255,255,0.2)]`}
         >
             <TopNav/>
             {/* <div className="flex flex-col bg-default"> */}
@@ -29,6 +31,7 @@ const MainLayout = () => {
             {/* </div> */}
             <MobileNav/>
         </motion.div>
+        </div>
       </AnimatePresence>
   )
 }

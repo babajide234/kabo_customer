@@ -212,7 +212,26 @@ const Shop = () => {
                       />
                     ))
                   ): (
-                    <></>
+                    <>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                    </>
                   )
                 }
               </div>
@@ -233,7 +252,17 @@ const Shop = () => {
                         />
                     ))
                     ):(
-                      <></>
+                      <>
+                      <div className=" w-full mr-3">
+                          <div className=" w-full h-[80px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full mr-3">
+                          <div className=" w-full h-[80px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full mr-3">
+                          <div className=" w-full h-[80px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                      </>
                     )
                 }
               </div>
@@ -255,7 +284,17 @@ const Shop = () => {
                       />
                     ))
                   ): (
-                    <></>
+                    <>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                        <div className=" w-full">
+                          <div className=" w-full h-[100px] bg-slate-200 rounded-lg mr-4 animate-pulse"/>
+                        </div>
+                    </>
                   )
                 }
               </div>
@@ -306,10 +345,11 @@ const Shop = () => {
                       </div>
                 ) : (
                 <>
-                  <div className="flex justify-between mt-10 px-5">
-                    <h2 className=" text-base font-bold">Recomendation</h2>
-                    <Link className=' text-primary text-sm font-semibold'>Show All</Link>
-                  </div>
+                  <CommonHeader 
+                    headerText="Recomendation" 
+                    link="/" 
+                    linkText="show all"
+                  />
                   <div className="flex px-5 mx-auto overflow-x-auto scrollbar-hide mt-5">
                     <div className="flex">
                         {

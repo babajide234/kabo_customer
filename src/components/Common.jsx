@@ -9,4 +9,11 @@ export const CommonHeader = ({ headerText, link, linkText}) => {
     </div>
   )
 }
+export const NoProducts = () => {
+  return (
+    <div className=" w-full h-72 flex justify-center items-center">
+        <h1 className=" text-lg leading-10 font-bold">No Products</h1>
+    </div>
+  )
+}
 

@@ -13,13 +13,17 @@ import useUserStore from '../../store/userSlice';
 import { SearchInput } from '../Inputs';
 import { motion } from 'framer-motion';
 import { headerVariants } from '../../utils/variants';
+import { GrClose } from 'react-icons/gr';
 
 const TopNav = () => {
   const toggleSidebar = useAppStore((state) => state.toggleSidebar);
+  const sidebar = useAppStore(state =>  state.sidebar)
+
   const cart = useCartStore((state) => state.cart);
   const token = useUserStore(state => state.token)
   const getCart = useCartStore(state=> state.getCart);
   const details = useUserStore(state=> state.details);
+
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
 
   useEffect(() => {
@@ -55,7 +59,11 @@ const TopNav = () => {
       className="py-6 w-full z-30 bg-default px-4"
     >
         <div className="w-full flex justify-between items-center">
-          <button onClick={() => toggleSidebar()}  className="text-xl font-bold text-gray-500 w-8 h-8 rounded-full flex justify-center items-center"><HiMenuAlt1/></button>
+          <button onClick={() => toggleSidebar()}  className={`text-xl font-bold ${sidebar ? 'bg-gray-300 text-default':'text-gray-500'}  w-9 h-9 rounded-full flex justify-center items-center`}>
+            {
+              sidebar ? <GrClose className='text-default'/> : <HiMenuAlt1/>
+            }
+          </button>
           <SearchInput/>
           <Link to='/profile' className=' w-8 h-8 rounded-full bg-slate-200 overflow-hidden'>
             <img src={details.photo ? details.photo : ''} alt="" className="" />

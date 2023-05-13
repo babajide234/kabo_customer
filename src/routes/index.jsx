@@ -18,6 +18,8 @@ import Register from "../pages/register";
 import SearchResult from "../pages/SearchResult";
 import Shop from "../pages/Shop";
 import UserProfile from "../pages/UserProfile";
+import CategoryList from "../pages/CategoryProductList";
+import StoreProductList from "../pages/StoreProductList";
 
 
 
@@ -48,6 +50,7 @@ const router = createBrowserRouter([
           path:'/shop',
           element:<Shop/>
         }
+        
       ]
     },
     {
@@ -85,7 +88,15 @@ const router = createBrowserRouter([
         {
           path:'/search',
           element: <SearchResult/>
-        }
+        },
+        {
+          path:'/category/:catid',
+          element:<CategoryList/>
+        },
+        {
+          path:'/store/:storeid',
+          element:<StoreProductList/>
+        },
       ]
     },
 ]);

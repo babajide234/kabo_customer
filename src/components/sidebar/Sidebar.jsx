@@ -11,9 +11,13 @@ import {
   BsTag,
   BsArrowRight
 } from 'react-icons/bs';
+import {
+  GrClose
+} from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import useAppStore from '../../store/appSlice';
 import useUserStore from '../../store/userSlice';
+import { leftToRight } from '../../utils/variants';
 
 
 
@@ -29,8 +33,16 @@ const Sidebar = () => {
   }
   
   return (
-    <motion.div key={'sidbar'} className={` min-h-screen w-full bg-primary absolute top-0 left-0  px-10 ${ sidebar ? '' : 'hidden -z-10'} ` }>
+    <motion.div 
+      key={'sidbar'} 
+      variants={leftToRight}
+      initial="hidden"
+      animate={sidebar ? 'show' : 'hidden'}
+      transition={{ duration: 0.3 }}
+      className={` min-h-screen w-[70%] bg-primary absolute top-0 left-0  px-10 ${ sidebar ? ' z-50' : 'hidden '} ` }
+    >
       <div className=" h-screen flex flex-col justify-between items-start py-20">
+        {/* <button className="  absolute top-5 right-5 bg-default p-2 rounded-full"><GrClose className='text-default'/></button> */}
         <ul className=" flex flex-col ">
           <li className='  text-base text-default font-semibold py-5 border-b border-solid border-slate-50 last-of-type:border-b-0 capitalize '> 
             <Link to='/' className=' flex items-center'>  <BiUserCircle className='mr-3 font-black text-2xl'/> Profile</Link>

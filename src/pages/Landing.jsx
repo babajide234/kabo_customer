@@ -52,19 +52,19 @@ const Landing = () => {
             <Step currentStep={currentStep} stepNumber={1}>
               <div className=" w-full h-full px-10 flex flex-col justify-center items-center">
                   <img src={logo} alt="" className=" w-36 h-36 mb-5" />
-                  <h1 className=" text-lg text-primary font-bold text-center">Lorem ipsum dolor sit amet.</h1>
+                  <h1 className=" text-lg text-primary font-bold text-center capitalize">find restaurantand products you love close to you</h1>
               </div>
             </Step>
             <Step currentStep={currentStep} stepNumber={2}>
               <div className=" w-full flex flex-col justify-center items-center">
                   <img src={logo} alt="" className=" w-36 h-36" />
-                  <h1 className=" text-xl text-primary font-bold ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis delectus mollitia corporis expedita! Aperiam vitae nihil doloribus sed atque sunt voluptatum cum autem quas amet accusamus, tempore assumenda! Molestias, a?</h1>
+                  <h1 className=" text-xl text-primary font-bold capitalize"> Kabo runs your errands</h1>
               </div>
             </Step>
             <Step currentStep={currentStep} stepNumber={3}>
               <div className=" w-full flex flex-col justify-center items-center">
                   <img src={logo} alt="" className=" w-36 h-36" />
-                  <h1 className=" text-3xl text-primary font-bold ">Food for Everyone 3</h1>
+                  <h1 className=" text-3xl text-primary font-bold capitalize">Kabo, your delivery friend.</h1>
               </div>
             </Step>
             <StepIndicator currentStep={currentStep} totalSteps={3} />

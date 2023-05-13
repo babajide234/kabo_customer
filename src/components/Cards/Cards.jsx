@@ -235,20 +235,8 @@ export const CategoryCard = ({ title, src ,id})=>{
 
 export const StoreCard = ({ title, src ,id})=>{
   return(
-    // <Link 
-    //   to={`/store/${id}`} 
-    //   className=" relative w-[150px] h-[150px] p-3 bg-transparent flex flex-col justify-center items-center mr-5 overflow-hidden"
-     
-    // >
-    //   <div className="  w-[100px] h-[100px] rounded-full shadow-card p-3 mb-3 ">
-    //     { src?  <img src={src} alt="" className=" w-full h-full" /> : <div className=" w-full h-full bg-slate-200 mr-4"/>}
-    //   </div>
-    //   <div className=" flex justify-center items-center">
-    //     <h2 className=" text-md font-bold text-primary capitalize text-ellipsis">{ title }</h2>
-    //   </div>
-    // </Link>
     <Link 
-      to={`/product/${id}`} 
+      to={`/store/${id}`} 
       className=" w-[239px] h-[90px] shadow-card p-3 bg-white flex justify-between mr-5 rounded-lg  ">
         <div className={`  w-[64px] h-[64px] mr-4 bg-slate-200 overflow-hidden rounded-lg flex justify-center items-center`}>
           { src ?  <img src={src} alt="" className=" w-full h-full" /> : <div className=" w-full h-[64px] bg-slate-200 rounded-lg mr-4"/>}
