@@ -56,15 +56,15 @@ const Landing = () => {
               </div>
             </Step>
             <Step currentStep={currentStep} stepNumber={2}>
-              <div className=" w-full flex flex-col justify-center items-center">
+              <div className=" w-full h-full px-10 flex flex-col justify-center items-center">
                   <img src={logo} alt="" className=" w-36 h-36" />
-                  <h1 className=" text-xl text-primary font-bold capitalize"> Kabo runs your errands</h1>
+                  <h1 className=" text-lg text-primary font-bold text-center capitalize"> Kabo runs your errands</h1>
               </div>
             </Step>
             <Step currentStep={currentStep} stepNumber={3}>
-              <div className=" w-full flex flex-col justify-center items-center">
+              <div className=" w-full h-full px-10 flex flex-col justify-center items-center">
                   <img src={logo} alt="" className=" w-36 h-36" />
-                  <h1 className=" text-3xl text-primary font-bold capitalize">Kabo, your delivery friend.</h1>
+                  <h1 className=" text-lg text-primary font-bold text-center capitalize">Kabo, your delivery friend.</h1>
               </div>
             </Step>
             <StepIndicator currentStep={currentStep} totalSteps={3} />

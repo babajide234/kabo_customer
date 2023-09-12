@@ -15,6 +15,7 @@ const StoreProductList = () => {
   
   useEffect(()=>{
     getSingleStore()
+    getProducts()
   },[])
   
   const handleSearchChange = (event) => {
@@ -57,7 +58,7 @@ const StoreProductList = () => {
       });
 
         console.log('category',response);
-        setProducts(response.data);
+        setProducts(response.data.data);
 
     } catch (error) {
       console.log(error)
@@ -70,7 +71,7 @@ const StoreProductList = () => {
       const category = product.category_name.toLowerCase();
       const query = searchQuery.toLowerCase();
       return productName.includes(query) || category.includes(query);
-  });
+  }) || [];
 
   return (
     <div className=" px-5 w-full pt-5 h-full">
@@ -96,26 +97,26 @@ const StoreProductList = () => {
         }
       </div>
       
-      <div className=" w-full">
-      {
-        filteredProducts?.length === 0 ? (
-        <NoProducts/>
-      ) : (
-        <div className=" grid grid-cols-3 gap-3">
-          {
-            filteredProducts?.map((product, index) => (
-              <ProductCard
-                key={index}
-                src={product.main_photo} 
-                title={product.name} 
-                price={`${product.amount} `} 
-                id={product.id} 
-              />
-            ))
-          }
-        </div>
-      )
-    }
+      <div className=" w-full h-full">
+        { 
+          filteredProducts?.length === 0 ? (
+            <NoProducts/>
+          ) : (
+            <div className=" grid grid-cols-3 gap-3">
+              {
+                filteredProducts?.map((product, index) => (
+                  <ProductCard
+                    key={index}
+                    src={product.main_photo} 
+                    title={product.name} 
+                    price={`${product.amount} `} 
+                    id={product.id} 
+                  />
+                ))
+              }
+            </div>
+          )
+        }
       </div>
 
     </div>

@@ -43,16 +43,12 @@ const CategoryList = () => {
     }
   }
 
-   // Apply search filter
-  //  let filteredProducts = [];
-  //  if (products?.data) {
      const filteredProducts = products?.filter((product) => {
        const productName = product.name?.toLowerCase() || '';
        const category = product.category_name?.toLowerCase() || '';
        const query = searchQuery.toLowerCase();
        return productName.includes(query) || category.includes(query);
-     });
-  //  }
+     }) || [];
   
   return (
     <div className=" px-5 w-full">
@@ -67,10 +63,8 @@ const CategoryList = () => {
       </div>
       {
         filteredProducts?.length === 0 ? (
-          <div className=" grid grid-cols-3 gap-3">
-            <div className=" bg-slate-300 w-full h-16"/>
-          </div>
-        // <NoProducts/>
+          
+        <NoProducts/>
       ) : (
         <div className=" grid grid-cols-3 gap-3">
           {
